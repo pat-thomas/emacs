@@ -15,11 +15,11 @@
 ;; (package-install 'paredit)
 ;; (package-install 'nrepl)
 ;; (package-install 'cyberpunk-theme)
-
+;; (package-install 'rainbow-delimiters)
+;; (package-install 'auto-complete)
 
 ;; --- User specific settings.
 (setq-default tab-width 2)
 (setq inhibit-splash-screen t)
 (load-theme 'cyberpunk t)
 (menu-bar-mode -1)
-
