@@ -12,3 +12,4 @@
 
 ;; --- User specific settings.
 (setq-default tab-width 2)
+(setq inhibit-splash-screen t)
