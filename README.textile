@@ -4,3 +4,7 @@
 * Paredit mode
 * Nrepl
 * Rainbow delimiters
+
+*Installation*
+@git clone git@github.com:pat-thomas/emacs.git@
+@ln -s ~/.emacs ~/path/to/repo/emacs/init.el@
