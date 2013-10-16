@@ -1,0 +1,6 @@
+*Emacs Configuration*
+
+* Clojure mode
+* Paredit mode
+* Nrepl
+* Rainbow delimiters
