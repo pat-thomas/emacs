@@ -11,23 +11,43 @@
 
 
 ;; --- Packages to install.
-;; (package-install 'clojure-mode)
-;; (package-install 'paredit)
-;; (package-install 'nrepl)
-;; (package-install 'cyberpunk-theme)
-;; (package-install 'rainbow-delimiters)
-;; (package-install 'auto-complete)
+(defvar pthomas/packages '(clojure-mode
+													 paredit
+													 nrepl
+													 cyberpunk-theme
+													 rainbow-delimiters
+													 auto-complete)
+	"Default packages")
+
+(defun pthomas/packages-installed-p ()
+	(loop for pkg in pthomas/packages
+				when (not (package-installed-p pkg)) do (return nil)
+				finally (return t)))
+
+(unless (pthomas/packages-installed-p)
+	(message "%s" "Refreshing package database...")
+	(package-refresh-contents)
+	(dolist (pkg pthomas/packages)
+		(when (not (package-installed-p pkg))
+			(package-install pkg))))
+
 
 ;; --- User specific settings.
 (setq-default tab-width 2)
-(setq inhibit-splash-screen t)
+(setq inhibit-splash-screen t
+			initial-scratch-message nil)
 (setq inhibit-startup-echo-area-message t)
 (load-theme 'cyberpunk t)
+(scroll-bar-mode -1)
+(tool-bar-mode -1)
 (menu-bar-mode -1)
+
+
+;; --- Global major modes
 
 
 ;; --- Mode hooks.
 (add-hook 'clojure-mode-hook 'paredit-mode)
-(add-hook 'clojure-mode-hook 'rainbow-delimeters-mode)
+(add-hook 'clojure-mode-hook 'rainbow-delimiters-mode)
 (add-hook 'emacs-lisp-mode-hook 'paredit-mode)
-(add-hook 'emacs-lisp-mode-hook 'rainbow-delimeters-mode)
+(add-hook 'emacs-lisp-mode-hook 'rainbow-delimiters-mode)
