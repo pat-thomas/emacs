@@ -42,8 +42,6 @@
       initial-scratch-message nil)
 (setq inhibit-startup-echo-area-message t)
 (load-theme 'cyberpunk t)
-(scroll-bar-mode -1)
-(tool-bar-mode -1)
 (menu-bar-mode -1)
 
 
