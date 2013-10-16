@@ -15,11 +15,11 @@
 
 ;; --- Packages to install.
 (defvar pthomas/packages '(clojure-mode
-													 paredit
-													 nrepl
-													 cyberpunk-theme
-													 rainbow-delimiters
-													 auto-complete)
+			   paredit
+			   nrepl
+			   cyberpunk-theme
+			   rainbow-delimiters
+			   auto-complete)
   "Default packages")
 
 (defun pthomas/packages-installed-p ()
