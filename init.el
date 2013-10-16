@@ -21,5 +21,13 @@
 ;; --- User specific settings.
 (setq-default tab-width 2)
 (setq inhibit-splash-screen t)
+(setq inhibit-startup-echo-area-message t)
 (load-theme 'cyberpunk t)
 (menu-bar-mode -1)
+
+
+;; --- Mode hooks.
+(add-hook 'clojure-mode-hook 'paredit-mode)
+(add-hook 'clojure-mode-hook 'rainbow-delimeters-mode)
+(add-hook 'emacs-lisp-mode-hook 'paredit-mode)
+(add-hook 'emacs-lisp-mode-hook 'rainbow-delimeters-mode)
