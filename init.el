@@ -36,7 +36,8 @@
 
 
 ;; --- User specific settings.
-(setq-default tab-width 2)
+(setq tab-width 2
+      indent-tabs-mode nil)
 (setq inhibit-splash-screen t
       initial-scratch-message nil)
 (setq inhibit-startup-echo-area-message t)
