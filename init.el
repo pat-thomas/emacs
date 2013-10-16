@@ -8,8 +8,8 @@
                "http://marmalade-repo.org/packages/"))
 ;; --- Bring in MELPA for package installation.
 (add-to-list 'package-archives
-						 '("melpa" .
-							 "http://melpa.milkbox.net/packages/") t)
+	     '("melpa" .
+	       "http://melpa.milkbox.net/packages/") t)
 (package-initialize)
 
 
@@ -24,8 +24,8 @@
 
 (defun pthomas/packages-installed-p ()
   (loop for pkg in pthomas/packages
-				when (not (package-installed-p pkg)) do (return nil)
-				finally (return t)))
+	when (not (package-installed-p pkg)) do (return nil)
+	finally (return t)))
 
 (unless (pthomas/packages-installed-p)
   (message "%s" "Refreshing package database...")
@@ -47,7 +47,12 @@
 (defalias 'yes-or-no-p 'y-or-n-p)
 
 
-;; Autocomplete
+;; --- Keybindings.
+(global-set-key (kbd "RET") 'newline-and-indent)
+(global-set-key (kbd "C-;") 'comment-or-uncomment-region)
+
+
+;; --- Autocomplete.
 (require 'auto-complete-config)
 (ac-config-default)
 
