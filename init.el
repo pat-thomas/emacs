@@ -47,6 +47,11 @@
 (menu-bar-mode -1)
 
 
+;; Autocomplete
+(require 'auto-complete-config)
+(ac-config-default)
+
+
 ;; --- Global major modes
 (ido-mode t)
 (setq ido-enable-flex-matching t
