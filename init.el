@@ -44,6 +44,7 @@
 (load-theme 'cyberpunk t)
 (menu-bar-mode -1)
 (setq make-backup-files nil)
+(defalias 'yes-or-no-p 'y-or-n-p)
 
 
 ;; Autocomplete
