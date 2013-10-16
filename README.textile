@@ -6,5 +6,5 @@
 * Rainbow delimiters
 
 *Installation*
-@git clone git@github.com:pat-thomas/emacs.git@
+@git clone git\@github.com:pat-thomas/emacs.git@
 @ln -s ~/.emacs ~/path/to/repo/emacs/init.el@
