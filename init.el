@@ -1,3 +1,6 @@
+;; CL (Common Lisp) mode for additional functionality.
+(require 'cl)
+
 ;; --- Bring in Marmalade for package installation.
 (require 'package)
 (add-to-list 'package-archives
@@ -17,25 +20,25 @@
 													 cyberpunk-theme
 													 rainbow-delimiters
 													 auto-complete)
-	"Default packages")
+  "Default packages")
 
 (defun pthomas/packages-installed-p ()
-	(loop for pkg in pthomas/packages
+  (loop for pkg in pthomas/packages
 				when (not (package-installed-p pkg)) do (return nil)
 				finally (return t)))
 
 (unless (pthomas/packages-installed-p)
-	(message "%s" "Refreshing package database...")
-	(package-refresh-contents)
-	(dolist (pkg pthomas/packages)
-		(when (not (package-installed-p pkg))
-			(package-install pkg))))
+  (message "%s" "Refreshing package database...")
+  (package-refresh-contents)
+  (dolist (pkg pthomas/packages)
+    (when (not (package-installed-p pkg))
+      (package-install pkg))))
 
 
 ;; --- User specific settings.
 (setq-default tab-width 2)
 (setq inhibit-splash-screen t
-			initial-scratch-message nil)
+      initial-scratch-message nil)
 (setq inhibit-startup-echo-area-message t)
 (load-theme 'cyberpunk t)
 (scroll-bar-mode -1)
