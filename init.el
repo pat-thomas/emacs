@@ -43,6 +43,7 @@
 (setq inhibit-startup-echo-area-message t)
 (load-theme 'cyberpunk t)
 (menu-bar-mode -1)
+(setq make-backup-files nil)
 
 
 ;; Autocomplete
