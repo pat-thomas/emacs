@@ -15,11 +15,11 @@
 
 ;; --- Packages to install.
 (defvar pthomas/packages '(clojure-mode
-			   paredit
-			   nrepl
-			   cyberpunk-theme
-			   rainbow-delimiters
-			   auto-complete)
+                           paredit
+                           nrepl
+                           cyberpunk-theme
+                           rainbow-delimiters
+                           auto-complete)
   "Default packages")
 
 (defun pthomas/packages-installed-p ()
@@ -68,3 +68,13 @@
 (add-hook 'clojure-mode-hook 'rainbow-delimiters-mode)
 (add-hook 'emacs-lisp-mode-hook 'paredit-mode)
 (add-hook 'emacs-lisp-mode-hook 'rainbow-delimiters-mode)
+
+
+;; Ruby file extension/file name associations.
+(add-to-list 'auto-mode-alist '("\\.rake$"    . ruby-mode))
+(add-to-list 'auto-mode-alist '("\\.gemspec$" . ruby-mode))
+(add-to-list 'auto-mode-alist '("\\.ru$"      . ruby-mode))
+(add-to-list 'auto-mode-alist '("Rakefile"    . ruby-mode))
+(add-to-list 'auto-mode-alist '("Gemfile"     . ruby-mode))
+(add-to-list 'auto-mode-alist '("Capfile"     . ruby-mode))
+(add-to-list 'auto-mode-alist '("Vagrantfile" . ruby-mode))
