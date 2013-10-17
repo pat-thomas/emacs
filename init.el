@@ -14,12 +14,13 @@
 
 
 ;; --- Packages to install.
-(defvar pthomas/packages '(clojure-mode
+(defvar pthomas/packages '(auto-complete
+			   clojure-mode
+			   cyberpunk-theme
+			   go-mode
+			   nrepl
                            paredit
-                           nrepl
-                           cyberpunk-theme
-                           rainbow-delimiters
-                           auto-complete)
+                           rainbow-delimiters)
   "Default packages")
 
 (defun pthomas/packages-installed-p ()
@@ -38,6 +39,7 @@
 ;; --- User specific settings.
 (setq tab-width 2
       indent-tabs-mode nil)
+(setq-default tab-width 2)
 (setq inhibit-splash-screen t
       initial-scratch-message nil)
 (setq inhibit-startup-echo-area-message t)
