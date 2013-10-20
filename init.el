@@ -67,10 +67,14 @@
 
 
 ;; --- Mode hooks.
-(add-hook 'clojure-mode-hook 'paredit-mode)
-(add-hook 'clojure-mode-hook 'rainbow-delimiters-mode)
+(add-hook 'clojure-mode-hook    'paredit-mode)
+(add-hook 'clojure-mode-hook    'rainbow-delimiters-mode)
 (add-hook 'emacs-lisp-mode-hook 'paredit-mode)
 (add-hook 'emacs-lisp-mode-hook 'rainbow-delimiters-mode)
+(add-hook 'nrepl-mode-hook      'paredit-mode)
+(add-hook 'nrepl-mode-hook      'rainbow-delimiters-mode)
+(add-hook 'nrepl-repl-mode-hook 'paredit-mode)
+(add-hook 'nrepl-repl-mode-hook 'rainbow-delimiters-mode)
 
 
 ;; Ruby file extension/file name associations.
