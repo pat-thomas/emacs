@@ -39,6 +39,7 @@
 ;; --- User specific settings.
 (setq tab-width 2
       indent-tabs-mode nil)
+(setq standard-indent 2)
 (setq-default tab-width 2)
 (setq inhibit-splash-screen t
       initial-scratch-message nil)
@@ -47,6 +48,8 @@
 (menu-bar-mode -1)
 (setq make-backup-files nil)
 (defalias 'yes-or-no-p 'y-or-n-p)
+(setq js-indent-level 2)
+(setq javascript-indent-level 2)
 
 
 ;; --- Keybindings.
