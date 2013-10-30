@@ -88,3 +88,13 @@
 (add-to-list 'auto-mode-alist '("Gemfile"     . ruby-mode))
 (add-to-list 'auto-mode-alist '("Capfile"     . ruby-mode))
 (add-to-list 'auto-mode-alist '("Vagrantfile" . ruby-mode))
+
+
+
+;; --- Custom keybindings. ---
+;; Lein deps.
+(global-set-key
+ (kbd "C-c l d")
+ (lambda ()
+	 (interactive)
+	 (shell-command "lein deps")))
