@@ -15,12 +15,13 @@
 
 ;; --- Packages to install.
 (defvar pthomas/packages '(auto-complete
-			   clojure-mode
-			   cyberpunk-theme
-			   go-mode
-			   nrepl
+                           cider
+													 clojure-mode
+													 cyberpunk-theme
+													 go-mode
                            paredit
-                           rainbow-delimiters)
+                           rainbow-delimiters
+													 tagedit)
   "Default packages")
 
 (defun pthomas/packages-installed-p ()
@@ -78,6 +79,10 @@
 (add-hook 'nrepl-mode-hook      'rainbow-delimiters-mode)
 (add-hook 'nrepl-repl-mode-hook 'paredit-mode)
 (add-hook 'nrepl-repl-mode-hook 'rainbow-delimiters-mode)
+(add-hook 'cider-mode-hook      'paredit-mode)
+(add-hook 'cider-mode-hook      'rainbow-delimiters-mode)
+(add-hook 'cider-repl-mode-hook 'paredit-mode)
+(add-hook 'cider-repl-mode-hook 'rainbow-delimiters-mode)
 
 
 ;; Ruby file extension/file name associations.
@@ -98,3 +103,10 @@
  (lambda ()
 	 (interactive)
 	 (shell-command "lein deps")))
+
+;; Go run.
+(global-set-key
+ (kbd "C-c g r")
+ (lambda ()
+	 (interactive)
+	 (shell-command (format "go run %s" (buffer-file-name)))))
