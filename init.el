@@ -51,6 +51,7 @@
 (defalias 'yes-or-no-p 'y-or-n-p)
 (setq js-indent-level 2)
 (setq javascript-indent-level 2)
+(show-paren-mode 1)
 
 
 ;; --- Keybindings.
