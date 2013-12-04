@@ -111,3 +111,15 @@
  (lambda ()
 	 (interactive)
 	 (shell-command (format "go run %s" (buffer-file-name)))))
+
+;; Def arguments.
+(defun find-arguments ()
+	(beginning-of-defun)
+	(forward-symbol 2)
+	(mark-sexp))
+
+(defun def-arguments ()
+	(interactive)
+	(find-arguments))
+
+(global-set-key (kbd "C-c d a") 'def-arguments)
