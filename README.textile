@@ -2,7 +2,7 @@
 
 * Clojure mode
 * Paredit mode
-* Nrepl
+* Cider
 * Rainbow delimiters
 
 *Installation*
