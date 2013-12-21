@@ -84,6 +84,8 @@
 (add-hook 'cider-mode-hook      'rainbow-delimiters-mode)
 (add-hook 'cider-repl-mode-hook 'paredit-mode)
 (add-hook 'cider-repl-mode-hook 'rainbow-delimiters-mode)
+(add-hook 'scheme-mode-hook     'paredit-mode)
+(add-hook 'scheme-mode-hook     'rainbow-delimiters-mode)
 
 
 ;; Ruby file extension/file name associations.
