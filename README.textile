@@ -2,9 +2,9 @@
 
 * Clojure mode
 * Paredit mode
-* Cider
+* CIDER (Clojure IDE and Repl)
 * Rainbow delimiters
 
 *Installation*
 @git clone https://github.com/pat-thomas/emacs.git@
-@ln -s ~/.emacs ~/path/to/repo/emacs/init.el@
+@ln -s ~/path/to/repo/emacs/init.el ~/.emacs@
