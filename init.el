@@ -125,3 +125,10 @@
 	(find-arguments))
 
 (global-set-key (kbd "C-c d a") 'def-arguments)
+
+
+;; --- Key rebindings. ---
+(add-hook
+ 'paredit-mode-hook
+ '(lambda ()
+		(local-set-key "\M-Oc" 'paredit-forward-slurp-sexp)))
