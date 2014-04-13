@@ -133,3 +133,5 @@
  'paredit-mode-hook
  '(lambda ()
 		(local-set-key "\M-Oc" 'paredit-forward-slurp-sexp)))
+
+(eval-after-load 'paredit '(define-key paredit-mode-map (kbd "M-)") 'paredit-forward-slurp-sexp))
