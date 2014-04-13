@@ -52,6 +52,7 @@
 (setq js-indent-level 2)
 (setq javascript-indent-level 2)
 (show-paren-mode 1)
+(global-hl-line-mode 1)
 
 
 ;; --- Keybindings.
