@@ -53,6 +53,7 @@
 (setq javascript-indent-level 2)
 (show-paren-mode 1)
 (global-hl-line-mode 1)
+(set-face-background hl-line-face "gray13")
 
 
 ;; --- Keybindings.
