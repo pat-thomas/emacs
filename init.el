@@ -1,22 +1,23 @@
-;; CL (Common Lisp) mode for additional functionality.
 (require 'cl)
 
 ;; --- Bring in Marmalade for package installation.
-(require 'package)
-(add-to-list 'package-archives
-             '("marmalade" .
-               "http://marmalade-repo.org/packages/"))
-;; --- Bring in MELPA for package installation.
-(add-to-list 'package-archives
-	     '("melpa" .
-	       "http://melpa.milkbox.net/packages/") t)
-(package-initialize)
-
+(defun load-marmalade ()
+	(require 'package)
+	(add-to-list 'package-archives
+							 '("marmalade" .
+								 "http://marmalade-repo.org/packages/"))
+	;; --- Bring in MELPA for package installation.
+	(add-to-list 'package-archives
+							 '("melpa" .
+								 "http://melpa.milkbox.net/packages/") t)
+	(package-initialize))
 
 ;; --- Packages to install.
 (defvar pthomas/packages '(auto-complete
                            cider
 													 clojure-mode
+													 company
+													 company-cider
 													 cyberpunk-theme
 													 go-mode
                            paredit
@@ -29,110 +30,104 @@
 	when (not (package-installed-p pkg)) do (return nil)
 	finally (return t)))
 
-(unless (pthomas/packages-installed-p)
-  (message "%s" "Refreshing package database...")
-  (package-refresh-contents)
-  (dolist (pkg pthomas/packages)
-    (when (not (package-installed-p pkg))
-      (package-install pkg))))
+(defun install-packages ()
+	(unless (pthomas/packages-installed-p)
+		(message "%s" "Refreshing package database...")
+		(package-refresh-contents)
+		(dolist (pkg pthomas/packages)
+			(when (not (package-installed-p pkg))
+				(package-install pkg)))))
 
+(defun load-user-specific-misc-settings ()
+	(setq tab-width 2
+				indent-tabs-mode nil)
+	(setq standard-indent 2)
+	(setq-default tab-width 2)
+	(setq inhibit-splash-screen t
+				initial-scratch-message nil)
+	(setq inhibit-startup-echo-area-message t)
+	(load-theme 'cyberpunk t)
+	(menu-bar-mode -1)
+	(setq make-backup-files nil)
+	(defalias 'yes-or-no-p 'y-or-n-p)
+	(setq js-indent-level 2)
+	(setq javascript-indent-level 2)
+	(show-paren-mode 1)
+	(global-hl-line-mode 1)
+	(set-face-background hl-line-face "gray13"))
 
-;; --- User specific settings.
-(setq tab-width 2
-      indent-tabs-mode nil)
-(setq standard-indent 2)
-(setq-default tab-width 2)
-(setq inhibit-splash-screen t
-      initial-scratch-message nil)
-(setq inhibit-startup-echo-area-message t)
-(load-theme 'cyberpunk t)
-(menu-bar-mode -1)
-(setq make-backup-files nil)
-(defalias 'yes-or-no-p 'y-or-n-p)
-(setq js-indent-level 2)
-(setq javascript-indent-level 2)
-(show-paren-mode 1)
-(global-hl-line-mode 1)
-(set-face-background hl-line-face "gray13")
+(defun load-auto-complete-mode ()
+	(require 'auto-complete)
+	(require 'auto-complete-config)
+	(ac-config-default))
 
+(defun load-ido-mode ()
+	(ido-mode t)
+	(setq ido-enable-flex-matching t
+				ido-use-virtual-buffers t)
+	(ido-everywhere))
 
-;; --- Keybindings.
-(global-set-key (kbd "RET") 'newline-and-indent)
-(global-set-key (kbd "C-;") 'comment-or-uncomment-region)
+(defun load-lisp-mode-hooks ()
+	(add-hook 'emacs-lisp-mode-hook 'paredit-mode)
+	(add-hook 'emacs-lisp-mode-hook 'rainbow-delimiters-mode)
+	(add-hook 'scheme-mode-hook     'paredit-mode)
+	(add-hook 'scheme-mode-hook     'rainbow-delimiters-mode))
 
+(defun load-clojure-mode-hooks ()
+	(add-hook 'clojure-mode-hook    'paredit-mode)
+	(add-hook 'clojure-mode-hook    'rainbow-delimiters-mode)
+	(add-hook 'cider-mode-hook      'paredit-mode)
+	(add-hook 'cider-mode-hook      'rainbow-delimiters-mode)
+	(add-hook 'cider-mode-hook      'company-mode) ;; also need to turn off auto-complete somehow...
+	(add-hook 'cider-repl-mode-hook 'paredit-mode)
+	(add-hook 'cider-repl-mode-hook 'rainbow-delimiters-mode)
+	(add-hook 'cider-repl-mode-hook 'company-mode))
 
-;; --- Autocomplete.
-(require 'auto-complete)
-(require 'auto-complete-config)
-(ac-config-default)
+(defun load-ruby-file-extension-mode-mappings ()
+	;; Ruby file extension/file name associations.
+	(add-to-list 'auto-mode-alist '("\\.rake$"    . ruby-mode))
+	(add-to-list 'auto-mode-alist '("\\.gemspec$" . ruby-mode))
+	(add-to-list 'auto-mode-alist '("\\.ru$"      . ruby-mode))
+	(add-to-list 'auto-mode-alist '("Rakefile"    . ruby-mode))
+	(add-to-list 'auto-mode-alist '("Gemfile"     . ruby-mode))
+	(add-to-list 'auto-mode-alist '("Capfile"     . ruby-mode))
+	(add-to-list 'auto-mode-alist '("Vagrantfile" . ruby-mode)))
 
+(defun load-custom-keybindings ()
+	;; Lein deps.
+	(global-set-key
+	 (kbd "C-c l d")
+	 (lambda ()
+		 (interactive)
+		 (shell-command "lein deps")))
+	
+	;; Go run.
+	(global-set-key
+	 (kbd "C-c g r")
+	 (lambda ()
+		 (interactive)
+		 (shell-command (format "go run %s" (buffer-file-name)))))
+	
+	;; Better keybinding for paredit-forward-slurp-sexp:
+	(add-hook
+	 'paredit-mode-hook
+	 '(lambda ()
+			(local-set-key "\M-Oc" 'paredit-forward-slurp-sexp)))
+	(eval-after-load 'paredit '(define-key paredit-mode-map (kbd "M-)") 'paredit-forward-slurp-sexp))
 
-;; --- Global major modes
-(ido-mode t)
-(setq ido-enable-flex-matching t
-      ido-use-virtual-buffers t)
+	;; Better keybinding for newline-and-indent:
+	(global-set-key (kbd "RET") 'newline-and-indent)
 
+	;; Better keybinding for comment-or-uncomment-region:
+	(global-set-key (kbd "C-;") 'comment-or-uncomment-region))
 
-;; --- Mode hooks.
-(add-hook 'clojure-mode-hook    'paredit-mode)
-(add-hook 'clojure-mode-hook    'rainbow-delimiters-mode)
-(add-hook 'emacs-lisp-mode-hook 'paredit-mode)
-(add-hook 'emacs-lisp-mode-hook 'rainbow-delimiters-mode)
-(add-hook 'nrepl-mode-hook      'paredit-mode)
-(add-hook 'nrepl-mode-hook      'rainbow-delimiters-mode)
-(add-hook 'nrepl-repl-mode-hook 'paredit-mode)
-(add-hook 'nrepl-repl-mode-hook 'rainbow-delimiters-mode)
-(add-hook 'cider-mode-hook      'paredit-mode)
-(add-hook 'cider-mode-hook      'rainbow-delimiters-mode)
-(add-hook 'cider-repl-mode-hook 'paredit-mode)
-(add-hook 'cider-repl-mode-hook 'rainbow-delimiters-mode)
-(add-hook 'scheme-mode-hook     'paredit-mode)
-(add-hook 'scheme-mode-hook     'rainbow-delimiters-mode)
-
-
-;; Ruby file extension/file name associations.
-(add-to-list 'auto-mode-alist '("\\.rake$"    . ruby-mode))
-(add-to-list 'auto-mode-alist '("\\.gemspec$" . ruby-mode))
-(add-to-list 'auto-mode-alist '("\\.ru$"      . ruby-mode))
-(add-to-list 'auto-mode-alist '("Rakefile"    . ruby-mode))
-(add-to-list 'auto-mode-alist '("Gemfile"     . ruby-mode))
-(add-to-list 'auto-mode-alist '("Capfile"     . ruby-mode))
-(add-to-list 'auto-mode-alist '("Vagrantfile" . ruby-mode))
-
-
-
-;; --- Custom keybindings. ---
-;; Lein deps.
-(global-set-key
- (kbd "C-c l d")
- (lambda ()
-	 (interactive)
-	 (shell-command "lein deps")))
-
-;; Go run.
-(global-set-key
- (kbd "C-c g r")
- (lambda ()
-	 (interactive)
-	 (shell-command (format "go run %s" (buffer-file-name)))))
-
-;; Def arguments.
-(defun find-arguments ()
-	(beginning-of-defun)
-	(forward-symbol 2)
-	(mark-sexp))
-
-(defun def-arguments ()
-	(interactive)
-	(find-arguments))
-
-(global-set-key (kbd "C-c d a") 'def-arguments)
-
-
-;; --- Key rebindings. ---
-(add-hook
- 'paredit-mode-hook
- '(lambda ()
-		(local-set-key "\M-Oc" 'paredit-forward-slurp-sexp)))
-
-(eval-after-load 'paredit '(define-key paredit-mode-map (kbd "M-)") 'paredit-forward-slurp-sexp))
+(load-marmalade)
+(install-packages)
+(load-user-specific-misc-settings)
+(load-custom-keybindings)
+(load-auto-complete-mode)
+(load-ido-mode)
+(load-lisp-mode-hooks)
+(load-clojure-mode-hooks)
+(load-ruby-file-extension-mode-mappings)
+(load-custom-keybindings)
