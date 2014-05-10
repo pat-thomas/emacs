@@ -22,6 +22,7 @@
 													 go-mode
                            paredit
                            rainbow-delimiters
+													 smex
 													 tagedit)
   "Default packages")
 
@@ -119,7 +120,10 @@
 	(global-set-key (kbd "RET") 'newline-and-indent)
 
 	;; Better keybinding for comment-or-uncomment-region:
-	(global-set-key (kbd "C-;") 'comment-or-uncomment-region))
+	(global-set-key (kbd "C-;") 'comment-or-uncomment-region)
+
+	;; Always use Smex:
+	(global-set-key (kbd "M-x") 'smex))
 
 (load-marmalade)
 (install-packages)
