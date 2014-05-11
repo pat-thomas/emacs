@@ -23,7 +23,8 @@
                            paredit
                            rainbow-delimiters
 													 smex
-													 tagedit)
+													 tagedit
+													 yasnippet)
   "Default packages")
 
 (defun pthomas/packages-installed-p ()
@@ -132,8 +133,23 @@
 	;; Keybinding to revert buffer:
 	(global-set-key [f5] 'pt-revert-buffer))
 
+(defun compile-and-load-el-files-in-library (library-path)
+  (dolist (file (directory-files (format "%s/" library-path) t "^[^#]+\\.el$"))
+    (let ((cfile (format "%sc" file)))
+      (byte-compile-file file)
+			(load-file file))))
+
+(defun load-custom-libraries ()
+	(compile-and-load-el-files-in-library "~/.emacs.d/lib")
+	(add-to-list 'load-path "~/.emacs.d/lib/pt-clojure.el")
+	(add-to-list 'load-path "~/.emacs.d/lib/pt-yasnippet.el"))
+
+(defun load-yasnippet ()
+	(yas-global-mode 1))
+
 (load-marmalade)
 (install-packages)
+(load-custom-libraries)
 (load-user-specific-misc-settings)
 (load-custom-keybindings)
 (load-auto-complete-mode)
@@ -142,3 +158,4 @@
 (load-clojure-mode-hooks)
 (load-ruby-file-extension-mode-mappings)
 (load-custom-keybindings)
+(load-yasnippet)

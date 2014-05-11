@@ -1,0 +1,6 @@
+#name : ns ...
+# --
+
+(ns `(pt-clj-ns-for-file-name (buffer-file-name))`)
+
+$0
