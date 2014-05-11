@@ -94,6 +94,10 @@
 	(add-to-list 'auto-mode-alist '("Capfile"     . ruby-mode))
 	(add-to-list 'auto-mode-alist '("Vagrantfile" . ruby-mode)))
 
+(defun pt-revert-buffer ()
+	(interactive)
+	(revert-buffer t t))
+
 (defun load-custom-keybindings ()
 	;; Lein deps.
 	(global-set-key
@@ -123,7 +127,10 @@
 	(global-set-key (kbd "C-;") 'comment-or-uncomment-region)
 
 	;; Always use Smex:
-	(global-set-key (kbd "M-x") 'smex))
+	(global-set-key (kbd "M-x") 'smex)
+
+	;; Keybinding to revert buffer:
+	(global-set-key [f5] 'pt-revert-buffer))
 
 (load-marmalade)
 (install-packages)
