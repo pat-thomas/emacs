@@ -147,6 +147,14 @@
 (defun load-yasnippet ()
 	(yas-global-mode 1))
 
+(defun load-haskell-mode ()
+	(add-hook 'haskell-mode-hook 'turn-on-haskell-simple-indent))
+
+(defun load-tidal ()
+	(setq load-path (cons "~/tidal/" load-path))
+	(require 'tidal)
+	(setq tidal-interpreter "/usr/local/bin/ghci"))
+
 (load-marmalade)
 (install-packages)
 (load-custom-libraries)
@@ -159,3 +167,5 @@
 (load-ruby-file-extension-mode-mappings)
 (load-custom-keybindings)
 (load-yasnippet)
+(load-haskell-mode)
+(load-tidal)
