@@ -1,0 +1,4 @@
+#name : with-midi-receiver ...
+# --
+(buzz.interfaces.common/with-midi-receiver ${0::reason}
+  $1)
