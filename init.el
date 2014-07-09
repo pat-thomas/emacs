@@ -148,7 +148,12 @@
 	(yas-global-mode 1))
 
 (defun load-haskell-mode ()
-	(add-hook 'haskell-mode-hook 'turn-on-haskell-simple-indent))
+  (add-hook 'haskell-mode-hook 'turn-on-haskell-indentation)
+  (add-hook 'haskell-mode-hook 'turn-on-haskell-doc-mode)
+	(global-set-key [f6]
+									(lambda ()
+										(interactive)
+										(async-shell-command (concat "runhaskell " buffer-file-name)))))
 
 (defun load-tidal ()
 	(setq load-path (cons "~/tidal/" load-path))
