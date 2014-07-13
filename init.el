@@ -24,6 +24,7 @@
                            rainbow-delimiters
 													 smex
 													 tagedit
+													 ujelly-theme
 													 yasnippet)
   "Default packages")
 
@@ -48,7 +49,7 @@
 	(setq inhibit-splash-screen t
 				initial-scratch-message nil)
 	(setq inhibit-startup-echo-area-message t)
-	(load-theme 'cyberpunk t)
+	(load-theme 'ujelly t)
 	(menu-bar-mode -1)
 	(setq make-backup-files nil)
 	(defalias 'yes-or-no-p 'y-or-n-p)
@@ -56,7 +57,7 @@
 	(setq javascript-indent-level 2)
 	(show-paren-mode 1)
 	(global-hl-line-mode 1)
-	(set-face-background hl-line-face "gray13"))
+	(set-face-background hl-line-face "black20"))
 
 (defun load-auto-complete-mode ()
 	(require 'auto-complete)
