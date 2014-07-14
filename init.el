@@ -157,9 +157,10 @@
 										(async-shell-command (concat "runhaskell " buffer-file-name)))))
 
 (defun load-tidal ()
-	(setq load-path (cons "~/tidal/" load-path))
-	(require 'tidal)
-	(setq tidal-interpreter "/usr/local/bin/ghci"))
+	(when (file-exists-p "~/tidal/")
+		(setq load-path (cons "~/tidal/" load-path))
+		(require 'tidal)
+		(setq tidal-interpreter "/usr/local/bin/ghci")))
 
 (load-marmalade)
 (install-packages)
