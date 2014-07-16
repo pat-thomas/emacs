@@ -19,6 +19,7 @@
 													 company
 													 company-cider
 													 cyberpunk-theme
+													 erlang
 													 go-mode
                            paredit
                            rainbow-delimiters
