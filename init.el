@@ -20,6 +20,7 @@
 													 company-cider
 													 cyberpunk-theme
 													 erlang
+													 elixir-mode
 													 go-mode
                            paredit
                            rainbow-delimiters
