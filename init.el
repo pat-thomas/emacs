@@ -105,6 +105,11 @@
 	(revert-buffer t t))
 
 (defun load-custom-keybindings ()
+	;; join-line
+	(global-set-key
+	 (kbd "C-c j l")
+	 'join-line)
+	
 	;; Lein deps.
 	(global-set-key
 	 (kbd "C-c l d")
