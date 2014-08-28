@@ -24,6 +24,7 @@
 													 go-mode
                            paredit
                            rainbow-delimiters
+													 rust-mode
 													 smex
 													 tagedit
 													 ujelly-theme
@@ -171,6 +172,9 @@
 		(require 'tidal)
 		(setq tidal-interpreter "/usr/local/bin/ghci")))
 
+(defun load-rust-mode-customizations ()
+	(setq rust-indent-offset 2))
+
 (load-marmalade)
 (install-packages)
 (load-custom-libraries)
@@ -185,3 +189,4 @@
 (load-yasnippet)
 (load-haskell-mode)
 (load-tidal)
+(load-rust-mode-customizations)
