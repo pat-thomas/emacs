@@ -13,7 +13,8 @@
 	(package-initialize))
 
 ;; --- Packages to install.
-(defvar pthomas/packages '(auto-complete
+(defvar pthomas/packages '(align-cljlet
+													 auto-complete
                            cider
 													 clojure-mode
 													 company
@@ -131,6 +132,9 @@
 	 '(lambda ()
 			(local-set-key "\M-Oc" 'paredit-forward-slurp-sexp)))
 	(eval-after-load 'paredit '(define-key paredit-mode-map (kbd "M-)") 'paredit-forward-slurp-sexp))
+
+	;; Keybinding for align-cljlet:
+	(eval-after-load 'paredit '(define-key paredit-mode-map (kbd "C-c a") 'align-cljlet))
 
 	;; Better keybinding for newline-and-indent:
 	(global-set-key (kbd "RET") 'newline-and-indent)
