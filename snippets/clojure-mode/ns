@@ -1,5 +1,9 @@
 #name : ns ...
 # --
-(ns `(pt-clj-ns-for-file-name (buffer-file-name))`)
+(ns `(pt-clj-ns-for-file-name (buffer-file-name))`
+  (:require [clojure.core.typed :as t :refer [ann cf check-ns defalias]]))
 
 $0
+
+;; always type check on compile
+(check-ns)
