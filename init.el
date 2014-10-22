@@ -18,7 +18,6 @@
                            cider
 													 clojure-mode
 													 company
-													 company-cider
 													 cyberpunk-theme
 													 erlang
 													 elixir-mode
@@ -62,11 +61,6 @@
 	(show-paren-mode 1)
 	(global-hl-line-mode 1)
 	(set-face-background hl-line-face "black20"))
-
-(defun load-auto-complete-mode ()
-	(require 'auto-complete)
-	(require 'auto-complete-config)
-	(ac-config-default))
 
 (defun load-ido-mode ()
 	(ido-mode t)
@@ -179,12 +173,15 @@
 (defun load-rust-mode-customizations ()
 	(setq rust-indent-offset 2))
 
+(defun load-company-mode-customizations ()
+	(setq company-idle-delay .2)
+	(add-hook 'after-init-hook 'global-company-mode))
+
 (load-marmalade)
 (install-packages)
 (load-custom-libraries)
 (load-user-specific-misc-settings)
 (load-custom-keybindings)
-(load-auto-complete-mode)
 (load-ido-mode)
 (load-lisp-mode-hooks)
 (load-clojure-mode-hooks)
@@ -194,3 +191,4 @@
 (load-haskell-mode)
 (load-tidal)
 (load-rust-mode-customizations)
+(load-company-mode-customizations)
