@@ -140,7 +140,8 @@
 	(global-set-key (kbd "M-x") 'smex)
 
 	;; Keybinding to revert buffer:
-	(global-set-key [f5] 'pt-revert-buffer))
+	(global-set-key [f5] 'pt-revert-buffer)
+  (global-set-key [f9] 'join-line))
 
 (defun compile-and-load-el-files-in-library (library-path)
   (dolist (file (directory-files (format "%s/" library-path) t "^[^#]+\\.el$"))
