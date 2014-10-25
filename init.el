@@ -175,7 +175,7 @@
 	(setq rust-indent-offset 2))
 
 (defun load-company-mode-customizations ()
-	(setq company-idle-delay .2)
+	(setq company-idle-delay .14)
 	(add-hook 'after-init-hook 'global-company-mode))
 
 (load-marmalade)
