@@ -22,6 +22,7 @@
 													 erlang
 													 elixir-mode
 													 go-mode
+													 haskell-mode
                            paredit
                            rainbow-delimiters
 													 rust-mode
