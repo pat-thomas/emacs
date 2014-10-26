@@ -159,12 +159,14 @@
 	(yas-global-mode 1))
 
 (defun load-haskell-mode ()
+	(defun bind-runhaskell ()
+		(local-set-key (kbd "<f6>")
+									 (lambda ()
+										 (interactive)
+										 (async-shell-command (concat "runhaskell " buffer-file-name)))))
   (add-hook 'haskell-mode-hook 'turn-on-haskell-indentation)
   (add-hook 'haskell-mode-hook 'turn-on-haskell-doc-mode)
-	(global-set-key [f6]
-									(lambda ()
-										(interactive)
-										(async-shell-command (concat "runhaskell " buffer-file-name)))))
+	(add-hook 'haskell-mode-hook 'bind-runhaskell))
 
 (defun load-tidal ()
 	(when (file-exists-p "~/tidal/")
