@@ -160,7 +160,7 @@
 
 (defun load-haskell-mode ()
 	(defun bind-runhaskell ()
-		(local-set-key (kbd "<f6>")
+		(local-set-key (kbd "C-c C-k")
 									 (lambda ()
 										 (interactive)
 										 (async-shell-command (concat "runhaskell " buffer-file-name)))))
