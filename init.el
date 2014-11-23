@@ -14,6 +14,7 @@
 
 ;; --- Packages to install.
 (defvar pthomas/packages '(align-cljlet
+													 aggressive-indent
 													 auto-complete
                            cider
 													 clojure-mode
@@ -61,6 +62,7 @@
 	(setq javascript-indent-level 2)
 	(show-paren-mode 1)
 	(global-hl-line-mode 1)
+	(global-aggressive-indent-mode 1)
 	(set-face-background hl-line-face "black20"))
 
 (defun load-ido-mode ()
