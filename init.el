@@ -180,13 +180,14 @@
 	(setq rust-indent-offset 2))
 
 (defun load-company-mode-customizations ()
-	(message "applying load-company-mode-customizations")
 	(setq company-idle-delay .14)
 	(setq company-selection-wrap-around t)
 	(add-hook 'after-init-hook 'global-company-mode)
 	(eval-after-load 'company
 		'(progn
-			 (define-key company-active-map (kbd "TAB") 'company-select-next)
+			 (define-key company-active-map (kbd "C-n") 'company-select-next)
+			 (define-key company-active-map (kbd "C-p") 'company-select-previous)
+			 (define-key company-active-map (kbd "TAB") 'company-complete-selection)
 			 (define-key company-active-map [tab] 'company-select-next))))
 
 (load-marmalade)
