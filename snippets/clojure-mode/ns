@@ -1,6 +1,5 @@
 #name : ns ...
 # --
-(ns `(pt-clj-ns-for-file-name (buffer-file-name))`
-  (:require [clj-utils.core :refer :all]))
+(ns `(pt-clj-ns-for-file-name (buffer-file-name))`)
 
 $0
