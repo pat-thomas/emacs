@@ -1,0 +1,4 @@
+#name : ns ...
+# --
+(defcomponent $0
+  (render ))
