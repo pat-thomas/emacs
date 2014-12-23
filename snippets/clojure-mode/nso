@@ -1,0 +1,8 @@
+#name : ns ...
+# --
+(ns `(pt-clj-ns-for-file-name (buffer-file-name))`
+  (:require [om.core :as om  :include-macros true]
+	          [om.dom  :as dom :include-macros true])
+  (:require-macros [om-utils.core :refer [defcomponent]]))
+
+$0
