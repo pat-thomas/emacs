@@ -190,6 +190,7 @@
 			 (define-key company-active-map (kbd "TAB") 'company-complete-selection)
 			 (define-key company-active-map [tab] 'company-select-next))))
 
+(setq byte-compile-warnings nil)
 (load-marmalade)
 (install-packages)
 (load-custom-libraries)
