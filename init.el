@@ -101,7 +101,8 @@
 
 (defun pt-revert-buffer ()
 	(interactive)
-	(revert-buffer t t))
+	(revert-buffer t t)
+	(cider-clear-compilation-highlights t))
 
 (defun load-custom-keybindings ()
 	;; join-line
