@@ -191,6 +191,15 @@
 			 (define-key company-active-map (kbd "TAB") 'company-complete-selection)
 			 (define-key company-active-map [tab] 'company-select-next))))
 
+(defun load-clojure-mode-custom-keybindings ()
+	(add-hook
+	 'clojure-mode-hook
+	 (lambda ()
+		 (local-set-key (kbd "C-c d a")
+										(lambda ()
+											(interactive)
+											(pt-clj-fn-args-to-defs))))))
+
 (setq byte-compile-warnings nil)
 (load-marmalade)
 (install-packages)
@@ -200,6 +209,7 @@
 (load-ido-mode)
 (load-lisp-mode-hooks)
 (load-clojure-mode-hooks)
+(load-clojure-mode-custom-keybindings)
 (load-ruby-file-extension-mode-mappings)
 (load-custom-keybindings)
 (load-yasnippet)
