@@ -7,6 +7,12 @@
          (string-equal (substring s 0 (length begins)) begins))
         (t nil)))
 
+(defun string/ends-with (s ends)
+  "returns non-nil if string S ends with ENDS.  Else nil."
+  (cond ((>= (length s) (length ends))
+         (string-equal (substring s (- (length s) (length ends)) (length s)) ends))
+        (t nil)))
+
 (defun pt-clj-ns-for-file-name (file-name)
   "Compute a viable clojure namespace for the given file name.
    Shamelessly ripped from github.com/kyleburton/krbemacs"
@@ -27,6 +33,35 @@
   (gsub! file-name "\\.cljs$" "")
   file-name)
 
+(defun type-annotation-p (elt)
+	(string/starts-with (format "%s" elt) "^"))
+
+(defun destructuring-keyword-p (elt)
+	(or (string/ends-with elt ":keys")
+			(equal ":as" elt)))
+
+(defun precedes-prismatic-schema-type-annotation-p (elt)
+	(equal ":-" elt))
+
+(defun remove-non-symbol-arguments (elts)
+	;; strip meta-data/destructuring from the list
+	(remove-if
+	 (lambda (elt)
+		 (or (type-annotation-p elt)
+				 (destructuring-keyword-p elt)
+				 (precedes-prismatic-schema-type-annotation-p elt)))
+	 elts))
+
+(defun handle-map-and-vector-destructuring (elt)
+	(replace-regexp-in-string
+	 "[\[]" ""
+	 (replace-regexp-in-string
+		"[\]]" ""
+		(replace-regexp-in-string
+		 "[\{]" ""
+		 (replace-regexp-in-string
+			"[}]" "" elt)))))
+
 (defun pt-clj-get-current-fn-args ()
 	"Shamelessly ripped from Relay/KBot's emacs conf."
   (interactive)
@@ -37,15 +72,12 @@
       (backward-char 1)
       (forward-sexp 1)
       (backward-char 1)
-      ;; strip meta-data from the list
-      (remove-if
-       (lambda (elt)
-         (or
-          (string/starts-with (format "%s" elt) "^")
-          (equal ":-" elt)))
-       (split-string
-        (buffer-substring start (point))
-        " ")))))
+			(mapcar
+			 'handle-map-and-vector-destructuring
+			 (remove-non-symbol-arguments
+				(split-string
+				 (buffer-substring start (point))
+				 " "))))))
 
 (defun pt-clj-fn-args-to-defs ()
   "Shamelessly ripped from Relay/KBot's emacs conf.
