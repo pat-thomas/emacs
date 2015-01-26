@@ -43,12 +43,16 @@
 (defun precedes-prismatic-schema-type-annotation-p (elt)
 	(equal ":-" elt))
 
+(defun ampersand-p (elt)
+	(equal "&" elt))
+
 (defun remove-non-symbol-arguments (elts)
 	;; strip meta-data/destructuring from the list
 	(remove-if
 	 (lambda (elt)
 		 (or (type-annotation-p elt)
 				 (destructuring-keyword-p elt)
+				 (ampersand-p elt)
 				 (precedes-prismatic-schema-type-annotation-p elt)))
 	 elts))
 
