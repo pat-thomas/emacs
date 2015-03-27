@@ -201,6 +201,14 @@
 											(interactive)
 											(pt-clj-fn-args-to-defs))))))
 
+(defun load-clojure-mode-customizations ()
+	(add-hook
+	 'clojure-mode-hook
+	 (lambda ()
+     (put-clojure-indent 'ebb-fn 1)
+     (put-clojure-indent 'uses-type 1)
+		 (put-clojure-indent 'defcomponent 1))))
+
 (setq byte-compile-warnings nil)
 (load-marmalade)
 (install-packages)
@@ -211,6 +219,7 @@
 (load-lisp-mode-hooks)
 (load-clojure-mode-hooks)
 (load-clojure-mode-custom-keybindings)
+(load-clojure-mode-customizations)
 (load-ruby-file-extension-mode-mappings)
 (load-custom-keybindings)
 (load-yasnippet)
