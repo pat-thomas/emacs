@@ -18,6 +18,7 @@
 													 aggressive-indent
 													 auto-complete
                            cider
+                           clj-refactor
 													 clojure-mode
 													 company
 													 cyberpunk-theme
@@ -202,11 +203,17 @@
 											(pt-clj-fn-args-to-defs))))))
 
 (defun load-clojure-mode-customizations ()
+  (add-hook
+    'clojure-mode-hook
+    (lambda ()
+      (clj-refactor-mode 1)
+      (cljr-add-keybindings-with-prefix "C-c C-m")))
 	(add-hook
 	 'clojure-mode-hook
 	 (lambda ()
      (put-clojure-indent 'ebb-fn 1)
      (put-clojure-indent 'uses-type 1)
+     (put-clojure-indent 'state 1)
 		 (put-clojure-indent 'defcomponent 1))))
 
 (setq byte-compile-warnings nil)
